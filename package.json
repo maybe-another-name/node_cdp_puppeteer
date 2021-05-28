@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "mocha": "^8.4.0",
     "puppeteer-core": "^9.1.1"
+  },
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha"
   }
 }
