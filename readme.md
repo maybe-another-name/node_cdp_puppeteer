@@ -11,6 +11,7 @@ Installing with apt (installing node will provide npm):
 
 ## Setup
 npm install puppeteer-core
+npm install playwright-core
 npm install mocha
 
 ## Running - Examples
