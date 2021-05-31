@@ -1,16 +1,18 @@
-import { BrowserType, Page, Request } from "playwright-core";
+import { BrowserType, Page, Request, Route } from "playwright-core";
 
-const { chromium } = require("playwright-core");
+import { chromium } from "playwright-core";
 
-function test_for_resource_type(resource_type: String, request: Request) {
+function route_for_resource_type(resource_type: string, route: Route): boolean {
+  let request = route.request();
   if (request.resourceType() === resource_type) {
     console.log(`aborting ${resource_type} request to ${request.url()}`);
+    route.abort();
     return true;
   }
   return false;
 }
 
-async function setupRouting(page: Page) {
+async function setupRouting(page: Page): Promise<void> {
   // file extensions are separate routes (additional suffixes would interfere)
   await page.route("**/*.{png,jpg,jpeg}", (route) => {
     let request = route.request();
@@ -28,16 +30,16 @@ async function setupRouting(page: Page) {
     let request = route.request();
 
     // test based on content-types
-    if (test_for_resource_type("image", request)) {
-      return route.abort();
+    if (route_for_resource_type("image", route)) {
+      return;
     }
-    if (test_for_resource_type("script", request)) {
-      return route.abort();
+    if (route_for_resource_type("script", route)) {
+      return;
     }
 
     // default accept
     console.log(`default proceed to host ${request.url()}`);
-    return route.continue();
+    route.continue();
   });
 }
 
