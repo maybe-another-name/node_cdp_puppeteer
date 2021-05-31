@@ -1,10 +1,14 @@
 {
   "dependencies": {
-    "mocha": "^8.4.0",
     "playwright-core": "^1.11.1",
     "puppeteer-core": "^9.1.1"
   },
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha"
+  },
+  "devDependencies": {
+    "mocha": "^8.4.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
   }
 }

@@ -12,12 +12,18 @@ Installing with apt (installing node will provide npm):
 ## Setup
 npm install puppeteer-core
 npm install playwright-core
-npm install mocha
+npm install --save-dev mocha
+npm install --save-dev typescript
+npm install --save-dev ts-node
+# npx tsc --init
 
 ## Running - Examples
 
 ### Running (launch arguments expect the proxy to be running)
 > node 0_puppeteer_example.js
 
+### Running typescript (launch arguments expect the proxy to be running)
+> npx ts_node 1_playwright_intercept.ts
+
 ### Running with mocha (expects the package.json to have the scripts.test attribute)
->npm test 0_puppeteer_another_example.js
+> npm test 0_puppeteer_another_example.js
