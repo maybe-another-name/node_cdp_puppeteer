@@ -1,9 +1,11 @@
 import * as site_data from "./sites/site_data";
 
-import { BrowserType, Page, Request, Route } from "playwright-core";
+import { BrowserContext, BrowserType, Page, Request, Route } from "playwright-core";
 
 import { chromium } from "playwright-core";
 
+// attempts to use playwright routing to fail/abort requests
+// doesn't fail redirects
 async function run_it() {
   const browser_options = {
     headless: false,
@@ -14,15 +16,17 @@ async function run_it() {
   };
 
   console.log("launching browser");
-  const browser = await chromium.launchPersistentContext(
+  const browserContext: BrowserContext = await chromium.launchPersistentContext(
     browser_options.userDataDir,
     browser_options
   );
 
-  console.log("browser new page");
-  const page: Page = await browser.newPage();
+  await setupRouting(browserContext);
 
-  setupRouting(page);
+  console.log("browser new page");
+  const page: Page = await browserContext.newPage();
+
+  // setupRouting(page);
 
   console.log("navigating browser");
 
@@ -49,42 +53,26 @@ async function run_it() {
   // await browser.close();
 }
 
-async function setupRouting(page: Page): Promise<void> {
+async function setupRouting(pageOrBrowserContext: Page|BrowserContext): Promise<void> {
   // file extensions are separate routes (additional suffixes would interfere)
-  await page.route("**/*.{png,jpg,jpeg}", (route) => {
+  await pageOrBrowserContext.route("**/*.{png,jpg,jpeg}", (route) => {
     let request = route.request();
-    console.debug(`aborting request to  ${request.url()}`);
+    console.debug(`aborting request to ${request.url()}`);
     route.abort();
   });
-  // await page.route("**/*.{js}", (route) => {
-  //   let request = route.request();
-  //   console.log(`aborting to ${request.url()}`);
-  //   route.abort();
-  // });
 
   // permitted pages
-  const admitted_pages: RegExp = /.*outlook.live.com.*/
-  await page.route(admitted_pages, (route) => {
+  await pageOrBrowserContext.route(site_data.admitted_pages, (route) => {
     let request = route.request();
-    console.debug(`continuing request to  ${request.url()}`);
+    console.debug(`continuing request to ${request.url()}`);
     route.continue();
   });
 
 
   // Abort based on the request type
-  await page.route("**/*", (route) => {
+  await pageOrBrowserContext.route("**/*", (route) => {
     let request = route.request();
-
-    // test based on content-types
-    if (route_for_resource_type("image", route)) {
-      return;
-    }
-    // if (route_for_resource_type("script", route)) {
-    //   return;
-    // }
-
-    // default abort
-    console.debug(`default abort to host ${request.url()}`);
+    console.debug(`default abort to ${request.url()}`);
     route.abort();
   });
 }
@@ -99,7 +87,7 @@ function route_for_resource_type(resource_type: string, route: Route): boolean {
   return false;
 }
 
-const DEBUG_MODE_ON = false;
+const DEBUG_MODE_ON = true;
 if (!DEBUG_MODE_ON) {
   console = console || {};
   console.debug = function () {};

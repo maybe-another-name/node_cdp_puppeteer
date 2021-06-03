@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "playwright-core": "^1.11.1",
-    "puppeteer-core": "^9.1.1"
+    "puppeteer-core": "^9.1.1",
+    "puppeteer-interceptor": "^2.2.0"
   },
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha"

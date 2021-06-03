@@ -12,6 +12,11 @@ Installing with apt (installing node will provide npm):
 ## Setup
 npm install puppeteer-core
 npm install playwright-core
+
+### deprecated, but still included
+npm install puppeteer-interceptor
+
+### dev deps
 npm install --save-dev mocha
 npm install --save-dev typescript
 npm install --save-dev ts-node
