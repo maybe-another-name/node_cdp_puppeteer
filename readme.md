@@ -24,17 +24,17 @@ Installing with apt (installing node will provide npm):
 
 ## Setup
 > npm install devtools-protocol
-> npm install chrome-remote-interface
-
-### still included (possibly including relevant dependencies)
-
 > npm install puppeteer-core
+
+### discarded (only necessary for things under the 'discards' folder)
+
+> npm install chrome-remote-interface
 > npm install playwright-core
 > npm install puppeteer-interceptor
+> npm install --save-dev mocha
 
 ### dev deps
 
-> npm install --save-dev mocha
 > npm install --save-dev typescript
 > npm install --save-dev ts-node
 
@@ -44,13 +44,9 @@ Installing with apt (installing node will provide npm):
 
 ## Running - Examples
 
-### Running (launch arguments expect the proxy to be running)
-
-> node 0_puppeteer_example.js
-
 ### Running typescript (launch arguments expect the proxy to be running)
 
-> npx ts_node 1_playwright_intercept.ts
+> npx ts-node 1_cdp_fail_fetch_patterns.ts
 
 ### Running with mocha (expects the package.json to have the scripts.test attribute)
 
