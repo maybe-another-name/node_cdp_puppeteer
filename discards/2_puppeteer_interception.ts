@@ -1,4 +1,4 @@
-import * as site_data from "./sites/site_data";
+import * as site_data from "../sites/site_data";
 
 import puppeteer, { HTTPResponse } from "puppeteer-core";
 

@@ -23,11 +23,12 @@ Installing with apt (installing node will provide npm):
 * Most scripts expect a proxy; the relevant line can be commented out/changed.
 
 ## Setup
+> npm install devtools-protocol
+> npm install chrome-remote-interface
+
+### still included (possibly including relevant dependencies)
 
 > npm install puppeteer-core
-
-### deprecated, but still included (possibly including relevant dependencies)
-
 > npm install playwright-core
 > npm install puppeteer-interceptor
 

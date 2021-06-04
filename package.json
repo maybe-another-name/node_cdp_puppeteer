@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "chrome-debugging-client": "^2.0.0",
+    "chrome-remote-interface": "^0.30.0",
+    "devtools-protocol": "0.0.888392",
     "playwright-core": "^1.11.1",
     "puppeteer-core": "^9.1.1",
     "puppeteer-interceptor": "^2.2.0"

@@ -1,4 +1,4 @@
-import * as site_data from "./sites/site_data";
+import * as site_data from "../sites/site_data";
 
 import { BrowserContext, BrowserType, Page, Request, Route } from "playwright-core";
 

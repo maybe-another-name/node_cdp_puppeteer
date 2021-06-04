@@ -1,6 +1,4 @@
-import { Page, Browser, WaitForOptions } from "puppeteer-core";
-
-import puppeteer, { HTTPResponse } from "puppeteer-core";
+import puppeteer, { Browser } from "puppeteer-core";
 
 // https://stackoverflow.com/questions/48986851/puppeteer-get-request-redirects
 

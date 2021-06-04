@@ -24,14 +24,22 @@ class CdpSessionHolder {
   // arrow function so 'this' keyword has expected scope
   fetchInterceptor = async (event: Protocol.Fetch.RequestPausedEvent) => {
     let requestUrl: string = event.request.url;
-    let fetchParam: any = { requestId: event.requestId };
     if (!requestUrl.match(acceptableSiteRegex)) {
-      fetchParam["errorReason"] = "BlockedByClient";
       console.log(`failing request to url: ${requestUrl}`);
-      await this.cdpSession.send("Fetch.failRequest", fetchParam);
+
+      let failFetchRequest: Protocol.Fetch.FailRequestRequest = {
+        requestId: event.requestId,
+        errorReason: "BlockedByClient",
+      };
+
+      await this.cdpSession.send("Fetch.failRequest", failFetchRequest);
     } else {
+      let continueFetchRequest: Protocol.Fetch.ContinueRequestRequest = {
+        requestId: event.requestId,
+      };
+
       console.log(`continuing request to url: ${requestUrl}`);
-      await this.cdpSession.send("Fetch.continueRequest", fetchParam);
+      await this.cdpSession.send("Fetch.continueRequest", continueFetchRequest);
     }
   };
 }
@@ -63,5 +71,5 @@ async function setupSessionAndInterceptor() {
 }
 
 (async () => {
-  run_it();
+  await run_it();
 })();
