@@ -3,10 +3,16 @@ const { spawnChrome } = require("chrome-debugging-client");
 
 import { ChromeSpawnOptions } from "chrome-debugging-client";
 
+// discard reasons:
+// almost a year since last update
+// indicates typescript support, but:
+// * this seems awkward (ex: not using optional(?) fields, instead using '|undefined')
+// * readme example doesn't use typescript
+// * doesn't seem to actualy export the relevant CDP commands
 
-export interface Potatoes{
-  leaves: string,
-  flowers?: string
+export interface Potatoes {
+  leaves: string;
+  flowers?: string;
 }
 
 /**
@@ -14,8 +20,7 @@ export interface Potatoes{
  * @param url {string}
  * @param file {string}
  */
-async function printToPDF(url:string, file:any) {
-
+async function printToPDF(url: string, file: any) {
   let browserOptions: ChromeSpawnOptions = {
     chromeExecutable: "chromium",
     userDataDir: "local_chrome_data",
@@ -69,7 +74,7 @@ async function printToPDF(url:string, file:any) {
 if (process.argv.length < 4) {
   console.log(`usage: printToPDF.js url file`);
   console.log(
-    `example: printToPDF.js https://en.wikipedia.org/wiki/Binomial_coefficient Binomial_coefficient.pdf`,
+    `example: printToPDF.js https://en.wikipedia.org/wiki/Binomial_coefficient Binomial_coefficient.pdf`
   );
   process.exit(1);
 }

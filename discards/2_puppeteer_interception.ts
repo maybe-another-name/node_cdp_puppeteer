@@ -4,6 +4,9 @@ import puppeteer, { HTTPResponse } from "puppeteer-core";
 
 import { Page, Browser, WaitForOptions } from "puppeteer-core";
 
+// discard reasons:
+// * puppeteer itself doesn't support redirect handling (requires interacting with CDP)
+
 // attempts to use puppeteer request interception to fail/abort requests
 // doesn't fail redirects
 async function run_it() {

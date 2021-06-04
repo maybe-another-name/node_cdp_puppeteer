@@ -1,5 +1,9 @@
 // Source = https://blog.scottlogic.com/2020/01/13/selenium-vs-puppeteer.html
 // modifications to make it work, add some logs, and to use desired chromium launch settings
+
+// discard reasons:
+// doesn't match my usecase (this is for testing support, rather than automation)
+
 const puppeteer = require("puppeteer-core");
 const assert = require("assert");
 const { doesNotMatch } = require("assert");
@@ -21,14 +25,14 @@ describe("search feature", () => {
     page = await browser.newPage();
   });
 
-  console.log("before test")
-  it("searching for a valid keyword shows 10 results", async function() {
+  console.log("before test");
+  it("searching for a valid keyword shows 10 results", async function () {
     await page.goto("https://developers.google.com/web", {
       waitUntil: "networkidle0",
     });
 
     // Type a keyword into the search box and press enter
-    console.log("starting search")
+    console.log("starting search");
     await page.type(".devsite-search-field", "something");
     page.keyboard.press("Enter");
 
@@ -47,12 +51,12 @@ describe("search feature", () => {
       10,
       "results page did not show 10 results"
     );
-    console.log("end of test")
+    console.log("end of test");
   }).timeout(12_000);
-  console.log("outside test")
+  console.log("outside test");
 
   after(async () => {
     await browser.close();
-    console.log("after test")
+    console.log("after test");
   });
 });

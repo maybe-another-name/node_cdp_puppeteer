@@ -3,6 +3,11 @@ import puppeteer, { Browser } from "puppeteer-core";
 import { intercept, patterns } from "puppeteer-interceptor";
 import { Interceptor } from "puppeteer-interceptor";
 
+
+// discard reasons: 
+// * doesn't work 
+// (perhaps a user error; either way - it didn't succeed in making it easier than just CDP)
+
 // attempting interception using the 'puppeteer-interceptor'
 // example taken from readme + test: 
 // https://github.com/jsoverson/puppeteer-interceptor/blob/master/test/index.test.ts

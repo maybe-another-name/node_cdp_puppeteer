@@ -4,8 +4,11 @@ import { BrowserContext, BrowserType, Page, Request, Route } from "playwright-co
 
 import { chromium } from "playwright-core";
 
+// discard reasons: 
+// * as with other playwright: no support for redirect (https://github.com/microsoft/playwright/issues/3993)
+// does support CDP access, but not reason to use this over puppeteer + cdp
+
 // attempts to use playwright routing to fail/abort requests
-// doesn't support redirects (https://github.com/microsoft/playwright/issues/3993)
 async function run_it() {
   const browser_options = {
     headless: false,
