@@ -1,4 +1,5 @@
 node_modules
-local_chrome_data
+*chrome_data
 *.png
+*.html
 sites
