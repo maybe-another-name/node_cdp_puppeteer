@@ -1,9 +1,13 @@
 # Testing various Chrome Devtools Protocol (CDP) Libraries
 
-* CDP library - interacting with requests & responses to drive the browser.
-* Canonical one is Puppeteer; managed by Google to demo CDP. 
-  * Some extensions to this (ex: puppeteer-interceptor)
-* Playwright; managed by Microsoft; led by the old Puppeteer TL
+- CDP library - interacting with requests & responses to drive the browser.
+- Canonical one is Puppeteer; managed by Google to demo CDP.
+  - Some extensions to this (ex: puppeteer-interceptor)
+- Playwright; managed by Microsoft; led by the old Puppeteer TL
+
+## Other executables
+
+These scripts typically expect a proxy to be running at localhost:8080. Additionally, they expect an executable named 'chromium' on the path. Both of these restrictions can be relaxed: the browser_options "executablePath" and "proxy-server" can be removed; in this case it will use the browser which comes with puppeteer (some version of Chrome) to connect directly.
 
 ## Install - executables (node/npm)
 
@@ -19,10 +23,11 @@ Installing with apt (installing node will provide npm):
 
 ### Conventions
 
-* Using the 'core' version of libraries (which don't include a browser), and instead using a separate browser. Puppeteer scripts expect the browser to be available as 'chromium'; Playwright scripts expect the full path (/usr/bin/chromium).
-* Most scripts expect a proxy; the relevant line can be commented out/changed.
+- Using the 'core' version of libraries (which don't include a browser), and instead using a separate browser. Puppeteer scripts expect the browser to be available as 'chromium'; Playwright scripts expect the full path (/usr/bin/chromium).
+- Most scripts expect a proxy; the relevant line can be commented out/changed.
 
 ## Setup
+
 > npm install devtools-protocol
 > npm install puppeteer-core
 

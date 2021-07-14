@@ -7,14 +7,14 @@ async function run_it() {
     headless: false,
     executablePath: "chromium",
     userDataDir: "local_chrome_data",
-    // args: ["--proxy-server=http://127.0.0.1:8080"],
+    args: ["--proxy-server=http://127.0.0.1:8080"],
     ignoreDefaultArgs: ["--disable-extensions"],
   };
 
   console.log("launching browser");
 
   const browser: Browser = await puppeteer.launch(browser_options);
-  const [ page ] = await browser.pages();
+  const [page] = await browser.pages();
   const redirects: any = [];
 
   const client = await page.target().createCDPSession();
@@ -28,7 +28,7 @@ async function run_it() {
       }
       if (requestToBeSent.request.headers.hasOwnProperty("Referer")) {
         redirects.push(requestToBeSent.documentURL);
-        console.log(`Redirection to ${requestToBeSent.documentURL}`)
+        console.log(`Redirection to ${requestToBeSent.documentURL}`);
       }
     } catch (error) {
       console.error(error);
